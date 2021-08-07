@@ -1,4 +1,5 @@
 import 'package:chopper/chopper.dart';
+import 'package:flutter_demos/utils/mobile_data_interceptor.dart';
 
 // Source code generation in Dart works by creating a new file which contains a "companion class".
 // In order for the source gen to know which file to generate and which files are "linked", you need to use the part keyword.
@@ -24,6 +25,42 @@ abstract class PostApiService extends ChopperService {
     final client = ChopperClient(
       // The first part of the URL is now here
       baseUrl: 'https://jsonplaceholder.typicode.com',
+
+      // Interceptors run just before/after the request is made
+      // They can be of 2 type :
+      //    1. Request   (Before)
+      //    2. Response  (After)
+      interceptors: [
+
+        // We have to pass a list of interceptors
+        // There are some commonly used interceptors that come packed with Chopper Package
+
+        // This is used to pass headers, this will be passed now in all request made using this chopper client
+        HeadersInterceptor({
+          'Cache-Control': 'no-cache',
+        }),
+
+        HttpLoggingInterceptor(), // logs messages in console
+        CurlInterceptor(), // Shows the curl request being made in console
+
+
+        // We can make custom anonymous Interceptors as well
+        // IMP : Interceptors have to always return a request/response
+        (Request request) async {
+          if (request.method == HttpMethod.Post) {
+            chopperLogger.info('Performed a POST request');
+          }
+          return request;
+        },
+        (Response response) async {
+          if (response.statusCode == 404) {
+            chopperLogger.severe('404 NOT FOUND');
+          }
+          return response;
+        },
+
+        MobileDataInterceptor()
+      ],
       services: [
         // The generated implementation
         _$PostApiService(),

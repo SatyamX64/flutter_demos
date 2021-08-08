@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'helper.dart';
  
 void main() => runApp(MyApp());
  
@@ -9,13 +11,14 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demos',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Flutter Demos'),
+          title: Text('Built Values'),
         ),
         body: Center(
           child: Container(
-            child: Text('Look for demos in specific git branches'),
+            child: Text('Check Terminal'),
           ),
         ),
+        floatingActionButton: FloatingActionButton(onPressed: Helper.runCode,),
       ),
     );
   }

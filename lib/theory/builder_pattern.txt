@@ -1,0 +1,51 @@
+For builder pattern we will have 3 Classes
+
+    abstract   // non instantiatable
+    actual     // immutable
+    builder    // mutable
+
+We can implement all this on our own but that will be too much boilerplate and error-prone, so source-gen is recommended
+
+here it is in built_value package : 
+
+abstract class T implements Built<T, TBuilder> {
+  
+  // we can use optional annotations to speicify things like nullable, key_value in json etc
+  int get id;
+
+  // more members
+
+  factory T(void Function(TBuilder) updates) = 
+    _$T; // _$T is a conventional name 
+  T._(); // we can write our things in this private Constructor, it's name is just a convention
+}
+
+
+// assume Tbuilder is for abstract class T
+// let _$T be the actual implementation of class T
+
+class TBuilder implements Builder<T, TBuilder>{
+  
+  // we will have all argument of T but private with getter/setter
+
+  // we will have one object of type _$T
+
+  // _$this()
+  // it will populate all the arguments from _$T, and make _$T null
+
+  // replace(_$T newVal)
+  // it will replace our _$T argument
+
+  // update( void function(builder)? update)
+  // it can update any of our arguments
+
+  // build()
+  // it will return us a instance of _$T argument
+  // populated with all our current arguments if not already done
+}
+
+class _$T extends T {
+
+    // see a generated class from the built_value package for reference
+
+}

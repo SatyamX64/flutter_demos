@@ -1,0 +1,40 @@
+1.
+    abstract class EncryptionAlgo {
+      factory EncryptionAlgo() = AESEncryption;
+    
+      is just a shorter way to write, // We also might use the first way, when we don't want to deal with Constructor of AESEncryption 
+
+      factory EncryptionAlgo() {
+        return AESEncryption();
+      }
+    }
+
+    class AESEncryption extends EncryptionAlgo { ... }
+
+
+2.
+
+    class Parent {
+
+        int val;
+
+        Person(this.val);
+    }
+
+    class Child extends Parent {
+
+        String name;
+
+        Child(this.name) : super(5);
+        // i.e we need to call the Constructor of the Parent class, using super in the initializer list
+        // but if we have a zero parameter Constructor in super then we need not call it since it will be implicit
+    }
+
+3. 
+
+    read about json_serialization and source code generation from notes/ other branches
+
+4. 
+    we need to pass all the initializers in the Constructor at one-go only
+    but using built_value, we can initialize a objects nullable members over time in many steps
+    [READ Article if doesn't make sense]

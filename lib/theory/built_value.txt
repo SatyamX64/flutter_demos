@@ -1,0 +1,18 @@
+The built_value package is for defining your own value types. 
+The term has a precise meaning, but we use it informally to mean types where equality is based only on value
+
+
+So built_value basically helps us with 
+
+    1. making our classes immutable
+    2. serialization {json and more}
+    3. implementing common functions like comparable, hashCode, toString etc.
+    4. Allowing us to use Enum Classes
+
+
+    
+https://medium.com/dartlang/darts-built-value-for-immutable-object-models-83e2497922d4#.bigviivg2
+[MUST READ] // core
+
+https://medium.com/dartlang/darts-built-value-for-serialization-f5db9d0f4159#.par5t1142
+[MUST READ] // serialization

@@ -1,0 +1,5 @@
+How to add serializer : 
+    1. Add static serialization method on a class
+    2. If any member is a class, make sure it is serializable too
+    3. Make a serializers.dart file 
+    4. add serializers header, add all classes that need serailization and generate

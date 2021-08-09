@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'person.dart';
+part of person;
 
 // **************************************************************************
 // BuiltValueGenerator
@@ -25,6 +25,87 @@ final BuiltSet<Gender> _$values = new BuiltSet<Gender>(const <Gender>[
   _$female,
 ]);
 
+Serializer<Person> _$personSerializer = new _$PersonSerializer();
+Serializer<Gender> _$genderSerializer = new _$GenderSerializer();
+
+class _$PersonSerializer implements StructuredSerializer<Person> {
+  @override
+  final Iterable<Type> types = const [Person, _$Person];
+  @override
+  final String wireName = 'Person';
+
+  @override
+  Iterable<Object?> serialize(Serializers serializers, Person object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object?>[
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(int)),
+      'name',
+      serializers.serialize(object.name, specifiedType: const FullType(String)),
+      'gender',
+      serializers.serialize(object.gender,
+          specifiedType: const FullType(Gender)),
+      'skills',
+      serializers.serialize(object.skills,
+          specifiedType: const FullType(List, const [const FullType(String)])),
+    ];
+
+    return result;
+  }
+
+  @override
+  Person deserialize(Serializers serializers, Iterable<Object?> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new PersonBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final Object? value = iterator.current;
+      switch (key) {
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'name':
+          result.name = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'gender':
+          result.gender = serializers.deserialize(value,
+              specifiedType: const FullType(Gender)) as Gender;
+          break;
+        case 'skills':
+          result.skills = serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(List, const [const FullType(String)]))
+              as List<String>;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$GenderSerializer implements PrimitiveSerializer<Gender> {
+  @override
+  final Iterable<Type> types = const <Type>[Gender];
+  @override
+  final String wireName = 'Gender';
+
+  @override
+  Object serialize(Serializers serializers, Gender object,
+          {FullType specifiedType = FullType.unspecified}) =>
+      object.name;
+
+  @override
+  Gender deserialize(Serializers serializers, Object serialized,
+          {FullType specifiedType = FullType.unspecified}) =>
+      Gender.valueOf(serialized as String);
+}
+
 class _$Person extends Person {
   @override
   final int id;
@@ -32,15 +113,22 @@ class _$Person extends Person {
   final String name;
   @override
   final Gender gender;
+  @override
+  final List<String> skills;
 
   factory _$Person([void Function(PersonBuilder)? updates]) =>
       (new PersonBuilder()..update(updates)).build();
 
-  _$Person._({required this.id, required this.name, required this.gender})
+  _$Person._(
+      {required this.id,
+      required this.name,
+      required this.gender,
+      required this.skills})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(id, 'Person', 'id');
     BuiltValueNullFieldError.checkNotNull(name, 'Person', 'name');
     BuiltValueNullFieldError.checkNotNull(gender, 'Person', 'gender');
+    BuiltValueNullFieldError.checkNotNull(skills, 'Person', 'skills');
   }
 
   @override
@@ -56,12 +144,15 @@ class _$Person extends Person {
     return other is Person &&
         id == other.id &&
         name == other.name &&
-        gender == other.gender;
+        gender == other.gender &&
+        skills == other.skills;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, id.hashCode), name.hashCode), gender.hashCode));
+    return $jf($jc(
+        $jc($jc($jc(0, id.hashCode), name.hashCode), gender.hashCode),
+        skills.hashCode));
   }
 
   @override
@@ -69,7 +160,8 @@ class _$Person extends Person {
     return (newBuiltValueToStringHelper('Person')
           ..add('id', id)
           ..add('name', name)
-          ..add('gender', gender))
+          ..add('gender', gender)
+          ..add('skills', skills))
         .toString();
   }
 }
@@ -89,6 +181,10 @@ class PersonBuilder implements Builder<Person, PersonBuilder> {
   Gender? get gender => _$this._gender;
   set gender(Gender? gender) => _$this._gender = gender;
 
+  List<String>? _skills;
+  List<String>? get skills => _$this._skills;
+  set skills(List<String>? skills) => _$this._skills = skills;
+
   PersonBuilder();
 
   PersonBuilder get _$this {
@@ -97,6 +193,7 @@ class PersonBuilder implements Builder<Person, PersonBuilder> {
       _id = $v.id;
       _name = $v.name;
       _gender = $v.gender;
+      _skills = $v.skills;
       _$v = null;
     }
     return this;
@@ -120,7 +217,9 @@ class PersonBuilder implements Builder<Person, PersonBuilder> {
             id: BuiltValueNullFieldError.checkNotNull(id, 'Person', 'id'),
             name: BuiltValueNullFieldError.checkNotNull(name, 'Person', 'name'),
             gender: BuiltValueNullFieldError.checkNotNull(
-                gender, 'Person', 'gender'));
+                gender, 'Person', 'gender'),
+            skills: BuiltValueNullFieldError.checkNotNull(
+                skills, 'Person', 'skills'));
     replace(_$result);
     return _$result;
   }

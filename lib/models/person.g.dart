@@ -6,18 +6,41 @@ part of 'person.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
+const Gender _$male = const Gender._('male');
+const Gender _$female = const Gender._('female');
+
+Gender _$valueOf(String name) {
+  switch (name) {
+    case 'male':
+      return _$male;
+    case 'female':
+      return _$female;
+    default:
+      throw new ArgumentError(name);
+  }
+}
+
+final BuiltSet<Gender> _$values = new BuiltSet<Gender>(const <Gender>[
+  _$male,
+  _$female,
+]);
+
 class _$Person extends Person {
   @override
   final int id;
   @override
   final String name;
+  @override
+  final Gender gender;
 
   factory _$Person([void Function(PersonBuilder)? updates]) =>
       (new PersonBuilder()..update(updates)).build();
 
-  _$Person._({required this.id, required this.name}) : super._() {
+  _$Person._({required this.id, required this.name, required this.gender})
+      : super._() {
     BuiltValueNullFieldError.checkNotNull(id, 'Person', 'id');
     BuiltValueNullFieldError.checkNotNull(name, 'Person', 'name');
+    BuiltValueNullFieldError.checkNotNull(gender, 'Person', 'gender');
   }
 
   @override
@@ -30,19 +53,23 @@ class _$Person extends Person {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is Person && id == other.id && name == other.name;
+    return other is Person &&
+        id == other.id &&
+        name == other.name &&
+        gender == other.gender;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, id.hashCode), name.hashCode));
+    return $jf($jc($jc($jc(0, id.hashCode), name.hashCode), gender.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('Person')
           ..add('id', id)
-          ..add('name', name))
+          ..add('name', name)
+          ..add('gender', gender))
         .toString();
   }
 }
@@ -58,6 +85,10 @@ class PersonBuilder implements Builder<Person, PersonBuilder> {
   String? get name => _$this._name;
   set name(String? name) => _$this._name = name;
 
+  Gender? _gender;
+  Gender? get gender => _$this._gender;
+  set gender(Gender? gender) => _$this._gender = gender;
+
   PersonBuilder();
 
   PersonBuilder get _$this {
@@ -65,6 +96,7 @@ class PersonBuilder implements Builder<Person, PersonBuilder> {
     if ($v != null) {
       _id = $v.id;
       _name = $v.name;
+      _gender = $v.gender;
       _$v = null;
     }
     return this;
@@ -86,8 +118,9 @@ class PersonBuilder implements Builder<Person, PersonBuilder> {
     final _$result = _$v ??
         new _$Person._(
             id: BuiltValueNullFieldError.checkNotNull(id, 'Person', 'id'),
-            name:
-                BuiltValueNullFieldError.checkNotNull(name, 'Person', 'name'));
+            name: BuiltValueNullFieldError.checkNotNull(name, 'Person', 'name'),
+            gender: BuiltValueNullFieldError.checkNotNull(
+                gender, 'Person', 'gender'));
     replace(_$result);
     return _$result;
   }
